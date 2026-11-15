@@ -6,21 +6,13 @@
   <!--IEブラウザ対策-->
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="description" content="ページの内容を表す文章" />
-  <title></title>
+  <title>AtlasSNS / 改修課題</title>
   <link rel="stylesheet" href="{{ asset('css/reset.css') }} ">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <link rel="stylesheet" href="{{ asset('css/style.css') }} ">
   <!--スマホ,タブレット対応-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <!-- Scripts -->
-  <!--サイトのアイコン指定-->
-  <link rel="icon" href="画像URL" sizes="16x16" type="image/png" />
-  <link rel="icon" href="画像URL" sizes="32x32" type="image/png" />
-  <link rel="icon" href="画像URL" sizes="48x48" type="image/png" />
-  <link rel="icon" href="画像URL" sizes="62x62" type="image/png" />
-  <!--iphoneのアプリアイコン指定-->
-  <link rel="apple-touch-icon-precomposed" href="画像のURL" />
   <!--OGPタグ/twitterカード-->
 </head>
 
@@ -33,28 +25,45 @@
     <div id="container">
       {{ $slot }}
     </div>
-    <div id="side-bar">
-      <div id="confirm">
-        <p>〇〇さんの</p>
-        <div>
-          <p>フォロー数</p>
-          <p>〇〇名</p>
+
+    <div id="sideBar">
+        <div id="confirm">
+            <!-- ログイン中のユーザー名を表示する -->
+            <p>{{ Auth::user()->username }}さんの</p>
+
+            <!-- フォロー数を横並びで表示する -->
+            <div class="sidebar_count">
+                <p>フォロー数</p>
+                <p>{{ $follow_count }}人</p>
+            </div>
+
+            <!-- フォローリストへのリンク -->
+            <p class="btn sidebar_list_button">
+                <a href="{{ route('follow-list') }}">フォローリスト</a>
+            </p>
+
+            <!-- フォロワー数を横並びで表示する -->
+            <div class="sidebar_count">
+                <p>フォロワー数</p>
+                <p>{{ $follower_count }}人</p>
+            </div>
+
+            <!-- フォロワーリストへのリンク -->
+            <p class="btn sidebar_list_button">
+                <a href="{{ route('follower-list') }}">フォロワーリスト</a>
+            </p>
         </div>
-        <p class="btn"><a href="">フォローリスト</a></p>
-        <div>
-          <p>フォロワー数</p>
-          <p>〇〇名</p>
-        </div>
-        <p class="btn"><a href="">フォロワーリスト</a></p>
-      </div>
-      <p class="btn"><a href="">ユーザー検索</a></p>
+
+        <!-- ユーザー検索へのリンク -->
+        <p class="btn sidebar_search_button">
+            <a href="{{ url('search') }}">ユーザー検索</a>
+        </p>
     </div>
+
   </div>
   <footer>
   </footer>
   <script src="{{ asset('js/app.js') }}"></script>
-  <script src="JavaScriptファイルのURL"></script>
-  <script src="JavaScriptファイルのURL"></script>
 </body>
 
 </html>
