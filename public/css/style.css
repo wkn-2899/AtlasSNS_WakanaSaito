@@ -1,22 +1,1023 @@
 @charset "utf-8";
-html{
-}
-body{
-}
-/* header */
-header{
-    background:#186AC9;
+
+/* ヘッダー全体：青い帯の中にロゴとユーザーメニューを配置する */
+#head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 100%;
+    height: 55px;
+    padding: 0 16px;
+    background: #0866bd;
+    position: relative;
+    z-index: 1000;
 }
 
-/* main content */
-#row{
+/* Atlasロゴの余白をなくす */
+#head h1 {
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+}
+
+/* ロゴ画像の大きさを調整する */
+#head h1 img {
+    display: block;
+    width: 100px;
+    height: auto;
+}
+
+/* ユーザーメニューをヘッダーの右側に配置する */
+.user_menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    margin-left: auto;
+}
+
+/* ユーザー名と矢印のボタン */
+.user_menu_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 36px;
+    padding: 0 8px;
+    border: none;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* ユーザー名の余白をなくす */
+.user_menu_button p {
+    margin: 0;
+    color: #fff;
+}
+
+/* ユーザーアイコンの大きさと形を調整する */
+.user_icon {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* メニュー一覧は初期状態では非表示にする */
+.user_menu_list {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    right: -16px;
+    z-index: 1001;
+    width: 190px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+/* メニューが開いているときに表示する */
+.user_menu_list.is-open {
+    display: block;
+}
+
+/* メニュー項目のリンクとログアウトボタン */
+.user_menu_list a,
+.user_menu_list form button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 57px;
+    padding: 10px;
+    border: none;
+    background: #fff;
+    color: #888;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* 2番目の項目「プロフィール編集」を濃紺にする */
+.user_menu_list li:nth-child(2) a {
+    background: #082d80;
+    color: #fff;
+}
+
+/* メニュー項目にマウスを合わせたときの表示 */
+.user_menu_list a:hover,
+.user_menu_list form button:hover {
+    background: #eee;
+    color: #333;
+}
+
+/* メインコンテンツ */
+#row {
     display: flex;
     flex-flow: row wrap;
 }
-#container{
+
+#container {
     flex: 0 0 80%;
 }
-#side-bar{
+
+/* 右側のサイドバー：左側の縦線を表示する */
+#sideBar {
     flex: 0 0 19%;
+    min-height: 700px;
+    box-sizing: border-box;
     border-left: 1px solid #727272;
+}
+
+/* 投稿フォーム全体 */
+.post_form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 85px;
+    padding: 20px 7%;
+    border-bottom: 4px solid #ddd;
+    background: #fff;
+}
+
+/* ユーザーアイコン */
+.post_user_icon {
+    flex: 0 0 40px;
+    margin-right: 10px;
+}
+
+.post_user_icon img {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* 投稿内容の入力欄 */
+.post_input {
+    flex: 1;
+    min-width: 0;
+}
+
+.post_input textarea {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 40px;
+    padding: 8px 0;
+    border: none;
+    outline: none;
+    resize: none;
+    background: transparent;
+    font-size: 12px;
+}
+
+/* 投稿ボタンの配置 */
+.post_button {
+    display: flex;
+    flex: 0 0 100%;
+    justify-content: flex-end;
+    margin-top: 4px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+/* 投稿ボタン画像 */
+.post_button img {
+    display: block;
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+/* 削除ボタンにマウスを乗せたときにホバー用画像へ切り替える */
+.delete_post_button:hover .delete_post_image {
+    content: url("../images/trash-h.png");
+}
+
+/* 編集ボタンにマウスを乗せたとき、ホバー用画像に切り替える */
+.edit_post_button:hover .edit_post_image {
+    content: url("../images/edit_h.png");
+}
+
+/* 投稿編集モーダルの背景を画面全体に表示する */
+.edit_post_modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+/* 編集画面を白いポップアップとして中央に表示する */
+.edit_post_modal_content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    width: 540px;
+    max-width: 90%;
+    padding: 20px 24px;
+    border-radius: 8px;
+    background: #fff;
+}
+
+/* ポップアップの見出し */
+.edit_post_modal_content h2 {
+    margin: 0 0 20px;
+    font-size: 20px;
+}
+
+/* 更新・キャンセルボタン */
+#editPostForm button {
+    margin-right: 8px;
+    padding: 6px 14px;
+    cursor: pointer;
+}
+
+/* 投稿一覧全体 */
+.post_list {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 投稿1件分のカード */
+.post_item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px 7%;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+}
+
+/* 投稿者のアイコンと名前 */
+.post_item_user {
+    display: flex;
+    align-items: center;
+    flex: 0 0 100%;
+    margin-bottom: 10px;
+}
+
+/* 投稿者のアイコン */
+.post_item_user img {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* 投稿本文 */
+.post_item_content {
+    flex: 1 1 100%;
+    min-width: 0;
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* 編集ボタンを右側に配置する */
+.edit_post_button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    border: none;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+/* 削除ボタンを編集ボタンの右横に配置する */
+.delete_post_form {
+    display: inline-flex;
+    margin-left: 10px;
+}
+
+/* 削除ボタンの見た目を整える */
+.delete_post_button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+/* 編集・削除画像のサイズをそろえる */
+.edit_post_image,
+.delete_post_image {
+    display: block;
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+}
+
+/* モーダル内のフォームを縦方向に配置する */
+#editPostForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 投稿編集モーダルの入力欄を整える */
+#editPostContent {
+    display: block;
+    width: 100%;
+    min-height: 120px;
+    margin-bottom: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+
+    /* 入力欄の枠線を四辺とも表示する */
+    border: 1px solid #ccc;
+
+    /* 右下のサイズ変更マークを非表示にする */
+    resize: none;
+}
+
+/* 保存用の編集アイコンを中央に配置する */
+.modal_save_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+/* 保存用アイコンのサイズ */
+.modal_save_image {
+    display: block;
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+}
+
+/* 保存ボタンにマウスを乗せたときの画像 */
+.modal_save_button:hover .modal_save_image {
+    content: url("../images/edit_h.png");
+}
+
+/* 投稿日時を投稿カードの右上に配置する */
+.post_item_date {
+    order: -1;
+    flex: 0 0 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    text-align: right;
+    font-size: 12px;
+    color: #888;
+}
+
+/* ユーザー検索フォーム */
+.search_form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 検索ボタンの枠線や背景をなくす */
+.search_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+/* 検索アイコンのサイズを検索BOXに合わせる */
+.search_button img {
+    display: block;
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+}
+
+/* 検索フォームと検索ワードを横並びにし、下側に区切り線を表示する */
+.search_area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-sizing: border-box;
+    padding: 30px 40px;
+    border-bottom: 4px solid #ddd;
+    background: #fff;
+}
+
+/* 検索ワードの表示 */
+.search_keyword {
+    margin: 0 0 0 140px;
+    font-size: 14px;
+}
+
+/* ユーザー一覧をメイン画面の中央に配置する */
+.user_search_list {
+    box-sizing: border-box;
+    padding: 30px 20px;
+}
+
+/* ユーザー情報を横並びにし、中央に配置する */
+.user_search_item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    min-height: 55px;
+    margin-bottom: 5px;
+}
+
+/* ユーザーアイコン */
+.user_search_icon {
+    flex: 0 0 45px;
+    width: 45px;
+    height: 45px;
+}
+
+.user_search_icon img {
+    display: block;
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* ユーザー名の表示領域 */
+.user_search_name {
+    flex: 0 0 140px;
+    min-width: 0;
+    margin-right: 110px;
+}
+
+/* フォローボタンの配置 */
+.user_follow_button {
+    flex: 0 0 85px;
+    width: 85px;
+    margin-left: 0;
+}
+
+/* フォロー・フォロー解除ボタン共通 */
+.follow_button,
+.unfollow_button {
+    display: block;
+    width: 85px;
+    min-height: 30px;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+/* フォローするボタン：青色 */
+.follow_button {
+    background-color: #55aaff;
+}
+
+/* フォロー解除ボタン：赤色 */
+.unfollow_button {
+    background-color: #ff3333;
+}
+
+/* メニューの開閉を示すV字矢印 */
+.menu_arrow {
+    position: relative;
+    display: inline-block;
+    flex: 0 0 52px;
+    width: 52px;
+    height: 30px;
+    box-sizing: border-box;
+    border: none;
+    font-size: 0;
+    transform: rotate(0deg);
+    transition: transform 0.2s;
+}
+
+/* V字を構成する2本の細い線 */
+.menu_arrow::before,
+.menu_arrow::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    width: 2px;
+    height: 14px;
+    border-radius: 9999px;
+    background-color: #fff;
+}
+
+/* V字の左側 */
+.menu_arrow::before {
+    left: 24px;
+    transform: rotate(-45deg);
+    transform-origin: 50% 100%;
+}
+
+/* V字の右側 */
+.menu_arrow::after {
+    left: 24px;
+    transform: rotate(45deg);
+    transform-origin: 50% 100%;
+}
+
+/* メニューを開いたらV字全体を上下反転する */
+.menu_arrow.is-open {
+    transform: scaleY(-1);
+}
+
+/* ユーザー検索の入力BOXのサイズ */
+.search_form input[name="keyword"] {
+    width: 250px;
+    height: 35px;
+    box-sizing: border-box;
+    padding: 6px 10px;
+    font-size: 14px;
+}
+
+/* ===== フォローリスト・フォロワーリスト共通 ===== */
+
+/* フォローリスト・フォロワーリストの上部 */
+.follow_list {
+    display: flex;
+    align-items: flex-start;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 105px;
+    padding: 10px 7%;
+    border-bottom: 4px solid #ddd;
+    background: #fff;
+}
+
+/* リストの見出し */
+.follow_list h2 {
+    flex: 0 0 150px;
+    margin: 5px 10px 0 0;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+/* アイコン一覧を枠内で折り返す */
+.follow_icon_list {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    box-sizing: border-box;
+    width: 360px;
+    min-height: 70px;
+    padding: 4px;
+    gap: 4px;
+}
+
+/* アイコン1人分の領域 */
+.follow_icon_list .follow_list_item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 30px;
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    transform: translateY(-4px);
+}
+
+/* ユーザーアイコン */
+.follow_icon_list .follow_list_icon img {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* ===== フォロー・フォロワーの投稿一覧 ===== */
+
+/* 投稿一覧全体 */
+.follow_posts {
+    width: 100%;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+/* 投稿一覧の見出し */
+.follow_posts h2 {
+    margin: 0;
+    padding: 10px 7%;
+    font-size: 16px;
+    font-weight: normal;
+    border-bottom: 4px solid #ddd;
+}
+
+/* 投稿1件分を横並びにする */
+.follow_post_item {
+    display: flex;
+    align-items: flex-start;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 57px;
+    padding: 8px 2%;
+    border-bottom: 1px solid #ccc;
+    background: #fff;
+}
+
+/* 投稿者のアイコン領域 */
+.follow_post_icon {
+    flex: 0 0 40px;
+    width: 40px;
+    margin-left: 70px;
+    margin-right: 10px;
+}
+
+/* 投稿者のアイコン画像 */
+.follow_post_icon img {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* ユーザー名・投稿内容の領域 */
+.follow_post_content {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+/* 投稿者名 */
+.follow_post_username {
+    margin: 0 0 5px;
+    font-size: 12px;
+}
+
+/* 投稿内容 */
+.follow_post_text {
+    margin: 0;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+/* 投稿日時を投稿枠内の右上に配置する */
+.follow_post_date {
+    flex: 0 0 130px;
+    margin: 0 0 0 10px;
+    text-align: right;
+    font-size: 10px;
+    color: #666;
+    align-self: flex-start;
+}
+
+/* ===== サイドバーの表示調整 ===== */
+
+/* フォロー数・フォロワー数を横並びにする */
+.sidebar_count {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 120px;
+}
+
+/* フォローリスト・フォロワーリストのボタン */
+.sidebar_list_button {
+    text-align: right;
+}
+
+/* ユーザー検索ボタン */
+.sidebar_search_button {
+    text-align: center;
+    margin-top: 12px;
+}
+
+/* サイドバーの各ボタン */
+.sidebar_list_button a,
+.sidebar_search_button a {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #0866bd;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* フォローリスト・フォロワーリストのボタンを右揃えにする */
+#confirm .sidebar_list_button {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: right;
+    margin-top: 8px;
+    margin-bottom: 12px;
+}
+
+/* ユーザー検索ボタンを中央揃えにする */
+#sideBar>.sidebar_search_button {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* サイドバーの各項目の間に余白をつける */
+#confirm .sidebar_count {
+    margin-bottom: 10px;
+}
+
+/* 3つのボタンの角を丸くする */
+.sidebar_list_button a,
+.sidebar_search_button a {
+    border-radius: 5px;
+}
+
+/* ユーザー名の上側に余白をつける */
+#confirm>p:first-child {
+    margin-top: 10px;
+}
+
+/* ユーザー名・フォロー数・フォロワー数の左側を開ける */
+#confirm>p:first-child,
+#confirm .sidebar_count {
+    padding-left: 8px;
+    box-sizing: border-box;
+}
+
+/* フォロワーリストとユーザー検索の間の区切り線を右端まで伸ばす */
+#confirm {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ===== 相手ユーザーのプロフィール画面 ===== */
+
+/* アイコン・プロフィール情報・フォローボタンを横並びにする */
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 25px 7%;
+    background: #fff;
+    border-bottom: 4px solid #ddd;
+}
+
+/* 左側のユーザーアイコン領域 */
+.profile_icon {
+    flex: 0 0 40px;
+}
+
+/* ユーザーアイコンの大きさと形を設定する */
+.profile_icon img {
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* 中央のプロフィール情報 */
+.profile_info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 0;
+    position: relative;
+}
+
+/* ユーザー名・自己紹介の各行 */
+.profile_detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 80px;
+    margin: 0;
+}
+
+/* ユーザー名と自己紹介の項目名の幅を揃える */
+.profile_label {
+    flex: 0 0 80px;
+    width: 80px;
+    font-size: 14px;
+    color: #555;
+    white-space: nowrap;
+}
+
+/* ユーザー名だけ文字を少し小さくする */
+.profile_detail:first-child .profile_label {
+    font-size: 12px;
+}
+
+/* 登録されたユーザー情報 */
+.profile_value {
+    min-width: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+/* 右端にフォローボタンを配置する */
+.profile_action {
+    flex: 0 0 auto;
+    margin-left: auto;
+}
+
+/* フォローボタンのフォームの余白をなくす */
+.profile_action form {
+    margin: 0;
+}
+
+/* プロフィール内の投稿一覧 */
+.profile_posts {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ===== プロフィール編集画面 ===== */
+
+/* 編集フォームを画面の中央に配置する */
+.profile_edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: calc(100vh - 55px);
+    padding: 40px 0;
+    background: #fff;
+}
+
+/* フォーム全体の横幅を設定する */
+.profile_edit form {
+    width: 520px;
+    max-width: 100%;
+    margin: 0;
+}
+
+/* アイコン・ユーザー名・入力欄を横並びにする */
+.profile_edit_top {
+    display: grid;
+    grid-template-columns: 30px 140px 320px;
+    align-items: center;
+    column-gap: 15px;
+    margin-bottom: 25px;
+}
+
+/* アイコン部分 */
+.profile_edit_top .profile_edit_icon {
+    grid-column: 1;
+    margin: 0;
+}
+
+/* ユーザー名の項目をグリッド内に配置する */
+.profile_edit_top .profile_edit_item {
+    display: contents;
+}
+
+/* ユーザー名の入力欄だけ右にずらす */
+.profile_edit_top .profile_edit_item input {
+    margin-left: 65px;
+}
+
+/* 各入力項目を横並びにする */
+.profile_edit_item {
+    display: grid;
+    grid-template-columns: 140px 320px;
+    align-items: center;
+    column-gap: 80px;
+    margin-left: 45px;
+    margin-bottom: 25px;
+}
+
+/* 項目名 */
+.profile_edit_item label {
+    display: block;
+    box-sizing: border-box;
+    width: 140px;
+    font-size: 14px;
+    color: #555;
+    white-space: nowrap;
+}
+
+/* アイコン画像の項目名を入力欄の上から36pxの中央に配置する */
+.profile_edit_item:has(input[type="file"])>label:first-child {
+    align-self: start;
+    margin-top: 11px;
+}
+
+/* 通常の入力欄 */
+.profile_edit_item input:not([type="file"]) {
+    box-sizing: border-box;
+    width: 320px;
+    height: 36px;
+    padding: 7px;
+    border: 1px solid #bbb;
+    background: #eee;
+    font-size: 13px;
+}
+
+/* 自己紹介欄 */
+.profile_edit_item textarea {
+    box-sizing: border-box;
+    width: 320px;
+    height: 36px;
+    padding: 7px;
+    border: 1px solid #bbb;
+    background: #eee;
+    font-size: 13px;
+    resize: none;
+}
+
+/* 実際のファイル選択欄を非表示にする */
+.profile_edit_item input[type="file"] {
+    display: none;
+}
+
+/* ファイル選択欄全体 */
+.profile_edit_item .file_select_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 320px;
+    height: 108px;
+    margin: 0;
+    border: 1px solid #bbb;
+    background: #eee;
+    cursor: pointer;
+}
+
+/* 白い四角のボタン */
+.profile_edit_item .file_select_button span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    background: #fff;
+    color: #999;
+    font-size: 13px;
+}
+
+/* 現在のユーザーアイコン */
+.profile_edit_icon img {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* 更新ボタン */
+.profile_edit form>button {
+    display: block;
+    width: 150px;
+    padding: 8px;
+    margin: 25px 0 0 200px;
+    border: none;
+    border-radius: 5px;
+    background: #ff4264;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* 更新ボタンにマウスを乗せたとき */
+.profile_edit form>button:hover {
+    background: #e52f50;
+}
+
+
+/* ===== プロフィール編集のバリデーションエラー ===== */
+
+/* 入力エラーのメッセージを赤色で表示する */
+.profile_edit .validation_error {
+    margin: 5px 0 0;
+    color: #e3342f;
+    font-size: 12px;
 }

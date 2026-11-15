@@ -17,10 +17,13 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    // 一括代入を許可するカラムを指定する
     protected $fillable = [
         'username',
         'email',
         'password',
+        'bio',
+        'icon_image',
     ];
 
     /**
@@ -28,8 +31,31 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+       // シリアライズ時に外部へ公開しない属性を指定する
+        protected $hidden = [
+            'password',
+            'remember_token',
+        ];
+
+    // 自分がフォローしているユーザーを取得する
+    public function following()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'follows',
+            'following_id',
+            'followed_id'
+        );
+    }
+
+    // 自分をフォローしているユーザーを取得する
+    public function followers()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'follows',
+            'followed_id',
+            'following_id'
+        );
+    }
 }

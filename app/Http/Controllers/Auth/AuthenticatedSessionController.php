@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +29,24 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         return redirect()->intended('top');
+    }
+
+    /**
+     * ログアウト処理を実行する
+     */
+    public function destroy(Request $request): RedirectResponse
+    {
+        // 現在ログインしているユーザーをログアウトさせる
+        Auth::guard('web')->logout();
+
+        // 現在のセッションを破棄する
+        $request->session()->invalidate();
+
+        // CSRFトークンを再生成する
+        $request->session()->regenerateToken();
+
+        // ログイン画面へ戻す
+        return redirect()->route('login');
     }
 
 }

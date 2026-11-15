@@ -1,10 +1,153 @@
 @charset "UTF-8";
 
-html{
+/* 画面全体の高さを確保する */
+html {
     height: 100%;
 }
 
-body{
-    height: 100%;
-    background: #186AC9;
+/* 画面全体を使ってロゴ・サービス名・フォームを縦に配置する */
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(to bottom,
+            #0866bd 0%,
+            #42a5f5 45%,
+            #ffe033 100%);
+    background-attachment: fixed;
+}
+
+/* ロゴとサービス名を中央に配置する */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 0;
+}
+
+/* Atlasロゴの余白を調整する */
+header h1 {
+    margin: 0;
+}
+
+/* Atlasロゴの大きさを調整する */
+header h1 img {
+    display: block;
+    width: 90px;
+    max-width: 80vw;
+    height: auto;
+}
+
+/* サービス名をロゴのすぐ下に配置する */
+header p {
+    margin: 0;
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* ログインフォーム内の文字を白色にする */
+#container form {
+    color: #ffffff;
+}
+
+/* 入力欄のラベルの余白と文字サイズを調整する */
+#container form label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 4px;
+    font-size: 10px;
+    font-weight: normal;
+}
+
+/* メールアドレスとパスワードの入力欄 */
+#container form .input {
+    display: block;
+    width: 100%;
+    height: 26px;
+    padding: 5px 8px;
+    box-sizing: border-box;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #333333;
+    font-size: 12px;
+}
+
+/* ログインボタンを小さくし、右寄りに配置する */
+#container form input[type="submit"] {
+    display: block;
+    width: 84px;
+    height: 26px;
+    margin: 12px 0 0 auto;
+    border: none;
+    border-radius: 5px;
+    background: #ff3333;
+    color: #ffffff;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+/* マウスを乗せたときの色 */
+#container form input[type="submit"]:hover {
+    background: #d92626;
+}
+
+/* フォーム内の文章を中央に配置する */
+#container form p {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* 新規登録リンクだけ文字を小さくする */
+#container form p:last-child {
+    font-size: 10px;
+}
+
+/* 新規登録リンクの文字色 */
+#container form p a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* ログインフォームを中央に配置する */
+#container {
+    width: 200px;
+    max-width: 90%;
+    margin: 30px auto 0;
+    padding: 15px 8px;
+    box-sizing: border-box;
+
+    /* 背景が透ける半透明の枠 */
+    background: rgba(100, 100, 100, 0.4);
+
+    /* フォームの周りの白線をなくす */
+    border: none;
+    border-radius: 6px;
+}
+
+/* 新規ユーザー登録の見出しを調整する */
+#container form h2 {
+    font-size: 14px;
+    text-align: center;
+    font-weight: normal;
+}
+
+/* パスワード欄とパスワード確認欄の幅・見た目を統一する */
+#container form input[type="password"] {
+    display: block;
+    width: 100%;
+    height: 26px;
+    padding: 5px 8px;
+    box-sizing: border-box;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #333333;
+    font-size: 12px;
+    outline: none;
 }
