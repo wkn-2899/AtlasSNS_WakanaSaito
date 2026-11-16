@@ -151,3 +151,8 @@ header p {
     font-size: 12px;
     outline: none;
 }
+
+/* 新規登録画面のバリデーションエラーを入力項目名と同じ大きさにする */
+#container form .error_message {
+    font-size: 10px;
+}
