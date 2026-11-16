@@ -105,23 +105,18 @@
     cursor: pointer;
 }
 
-/* 2番目の項目「プロフィール編集」を濃紺にする */
-.user_menu_list li:nth-child(2) a {
-    background: #082d80;
-    color: #fff;
-}
-
-/* メニュー項目にマウスを合わせたときの表示 */
+/* メニュー項目にマウスを乗せたとき濃い青色にする */
 .user_menu_list a:hover,
 .user_menu_list form button:hover {
-    background: #eee;
-    color: #333;
+    background: #00297E;
+    color: #fff;
 }
 
 /* メインコンテンツ */
 #row {
     display: flex;
     flex-flow: row wrap;
+    min-height: calc(100vh - 55px);
 }
 
 #container {
@@ -1020,4 +1015,9 @@
     margin: 5px 0 0;
     color: #e3342f;
     font-size: 12px;
+}
+
+/* バリデーションエラーメッセージを赤色で表示する */
+.error_message {
+    color: red;
 }
