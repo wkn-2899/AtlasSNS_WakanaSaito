@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="{{ asset('css/reset.css') }} ">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/logout.css') }} ">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
         <!-- 登録完了画面のときだけ専用CSSを読み込む -->
         @if (View::getSection('page_css') === 'added')
