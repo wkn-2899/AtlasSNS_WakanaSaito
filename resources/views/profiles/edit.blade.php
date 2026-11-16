@@ -38,7 +38,7 @@
 
                        <!-- ユーザー名のバリデーションエラーを表示する -->
                        @error('username')
-                           <p class="validation_error">{{ $message }}</p>
+                           <p class="error_message">{{ $message }}</p>
                        @enderror
                    </div>
                 </div>
@@ -58,7 +58,7 @@
 
                     <!-- メールアドレスのバリデーションエラーを表示する -->
                     @error('email')
-                        <p class="validation_error">{{ $message }}</p>
+                        <p class="error_message">{{ $message }}</p>
                     @enderror
                 </div>
             </div>
@@ -76,7 +76,7 @@
 
                     <!-- パスワードのバリデーションエラーを表示する -->
                     @error('password')
-                        <p class="validation_error">{{ $message }}</p>
+                        <p class="error_message">{{ $message }}</p>
                     @enderror
                 </div>
             </div>
@@ -94,7 +94,7 @@
 
                     <!-- パスワード確認のバリデーションエラーを表示する -->
                     @error('password_confirmation')
-                        <p class="validation_error">{{ $message }}</p>
+                        <p class="error_message">{{ $message }}</p>
                     @enderror
                 </div>
             </div>
@@ -111,7 +111,7 @@
 
                     <!-- 自己紹介のバリデーションエラーを表示する -->
                     @error('bio')
-                        <p class="validation_error">{{ $message }}</p>
+                        <p class="error_message">{{ $message }}</p>
                     @enderror
                 </div>
             </div>
@@ -139,7 +139,7 @@
 
                     <!-- アイコン画像のバリデーションエラーを表示する -->
                     @error('icon_image')
-                        <p class="validation_error">{{ $message }}</p>
+                        <p class="error_message">{{ $message }}</p>
                     @enderror
                 </div>
             </div>
