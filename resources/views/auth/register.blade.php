@@ -7,25 +7,25 @@
 {{ Form::label('ユーザー名') }}
 {{ Form::text('username',null,['class' => 'input', 'autocomplete' => 'off']) }}
 @error('username')
-    <p>{{ $message }}</p>
+    <p class="error_message">{{ $message }}</p>
 @enderror
 
 {{ Form::label('メールアドレス') }}
 {{ Form::email('email',null,['class' => 'input', 'autocomplete' => 'off']) }}
 @error('email')
-    <p>{{ $message }}</p>
+    <p class="error_message">{{ $message }}</p>
 @enderror
 
 {{ Form::label('パスワード') }}
-{{ Form::password('password_confirmation', ['class' => 'input', 'autocomplete' => 'new-password']) }}
+{{ Form::password('password', ['class' => 'input', 'autocomplete' => 'new-password']) }}
 @error('password')
-    <p>{{ $message }}</p>
+    <p class="error_message">{{ $message }}</p>
 @enderror
 
 {{ Form::label('パスワード確認') }}
 {{ Form::password('password_confirmation', ['class' => 'input']) }}
 @error('password_confirmation')
-    <p>{{ $message }}</p>
+    <p class="error_message">{{ $message }}</p>
 @enderror
 
 {{ Form::submit('新規登録') }}
